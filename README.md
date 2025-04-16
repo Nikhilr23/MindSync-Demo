@@ -28,11 +28,11 @@ With rising stress, anxiety, and mental health challenges—especially among stu
 
 ---
 
-## 📷 Screenshots
 
-> (Upload your app screenshots here and link them like below)
+## 🖼️ Screenshots
 
-![Home Screen](screenshots/home.png)
+### 🏠 Home Page
+![Home Page](screenshots/home.png)
 ![Mood Tracker](screenshots/mood-tracker.png)
 ![Offline Resource Page](screenshots/resources.png)
 
