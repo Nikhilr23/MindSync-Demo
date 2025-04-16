@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Profile - MindSync</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <style>
+    body { font-family: Arial; background: #e8f5e9; padding: 20px; text-align: center; }
+    .box { background: white; margin: 20px auto; padding: 20px; border-radius: 10px; width: 90%; max-width: 600px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+    .entry { text-align: left; margin-top: 10px; background: #f1f8e9; padding: 10px; border-left: 4px solid #689f38; border-radius: 4px; }
+  </style>
+</head>
+<body>
+  <h2>👤 My Profile</h2>
+  <div class="box" id="userBox"></div>
+
+  <div class="box">
+    <h3>My Mood Journal</h3>
+    <div id="entries"></div>
+  </div>
+
+  <script>
+    const profile = JSON.parse(localStorage.getItem('userProfile'));
+    const journal = JSON.parse(localStorage.getItem('moodJournal')) || [];
+    const userBox = document.getElementById("userBox");
+    const entries = document.getElementById("entries");
+
+    if (profile) {
+      userBox.innerHTML = `<p><strong>Name:</strong> ${profile.name}</p><p><strong>Email:</strong> ${profile.email}</p><p><strong>Goal:</strong> ${profile.goal}</p>`;
+    } else {
+      userBox.innerHTML = "<p>No profile found.</p>";
+    }
+
+    journal.reverse().forEach(j => {
+      const e = document.createElement("div");
+      e.className = "entry";
+      e.innerHTML = `<strong>${j.date}</strong><br>Mood: ${j.mood}<br>${j.text}`;
+      entries.appendChild(e);
+    });
+  </script>
+</body>
+</html>

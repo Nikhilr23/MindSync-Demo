@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>MindSync - Home</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <style>
+    body { font-family: 'Segoe UI', sans-serif; background: linear-gradient(to right, #e1bee7, #f8bbd0); margin: 0; padding: 0; text-align: center; }
+    h1 { margin: 30px 0 10px; color: #4a148c; }
+    .nav-area { display: flex; justify-content: center; flex-wrap: wrap; gap: 15px; margin-bottom: 30px; }
+    .nav-btn { padding: 15px 30px; background: white; border: none; border-radius: 10px; font-size: 18px; color: #6a1b9a; cursor: pointer; text-decoration: none; box-shadow: 0 2px 6px rgba(0,0,0,0.2); }
+    .chatbox { background: white; max-width: 600px; margin: 0 auto 40px; padding: 20px; border-radius: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
+    #chat { height: 250px; overflow-y: auto; background: #f3e5f5; padding: 10px; border-radius: 10px; text-align: left; margin-bottom: 10px; }
+    .bubble { display: inline-block; padding: 10px 15px; border-radius: 20px; margin: 5px 0; max-width: 80%; clear: both; }
+    .user { background: #d1c4e9; color: #311b92; float: right; text-align: right; }
+    .bot { background: #f8bbd0; color: #880e4f; float: left; text-align: left; }
+    input { width: 75%; padding: 10px; border-radius: 10px; border: 1px solid #ccc; font-size: 16px; }
+    button { width: 20%; padding: 10px; margin-left: 5px; border: none; background: #8e24aa; color: white; font-size: 16px; border-radius: 10px; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <h1>Welcome to MindSync 💜</h1>
+  <div class="nav-area">
+    <a class="nav-btn" href="resources.html">📚 Resources</a>
+    <a class="nav-btn" href="sessions.html">🧘 Sessions</a>
+    <a class="nav-btn" href="profile.html">👤 Profile</a>
+    <a class="nav-btn" href="contact.html">📞 Contact</a>
+  </div>
+  <div class="chatbox">
+    <h2>MindSync Assistant 🤖</h2>
+    <div id="chat"></div>
+    <input type="text" id="userInput" placeholder="How are you feeling today?" />
+    <button onclick="sendMessage()">Send</button>
+  </div>
+  <script>
+    function sendMessage() {
+      const input = document.getElementById("userInput");
+      const msg = input.value.trim();
+      if (!msg) return;
+      appendMessage("You", msg, "user");
+      input.value = "";
+      const reply = getBotResponse(msg.toLowerCase());
+      setTimeout(() => appendMessage("MindSync", reply, "bot"), 300);
+    }
+    function appendMessage(sender, msg, cls) {
+      const chat = document.getElementById("chat");
+      const div = document.createElement("div");
+      div.className = "bubble " + cls;
+      div.innerHTML = `<strong>${sender}:</strong> ${msg}`;
+      chat.appendChild(div);
+      chat.scrollTop = chat.scrollHeight;
+    }
+    function getBotResponse(input) {
+      if (input.includes("sad")) return "I hear you. Let's try a calm breathing session.";
+      if (input.includes("anxious")) return "You're not alone. Try our guided meditation.";
+      if (input.includes("happy")) return "That's awesome! Keep riding that wave 🌈";
+      if (input.includes("angry")) return "It’s okay to feel angry. Try some reflection or writing it out.";
+      if (input.includes("tired")) return "Rest is self-care. A quick nap or gentle music may help.";
+      return "Thank you for sharing. How else can I support you?";
+    }
+  </script>
+</body>
+</html>

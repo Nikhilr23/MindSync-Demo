@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sessions - MindSync</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <style>
+    body { font-family: Arial; background: #fce4ec; padding: 20px; text-align: center; }
+    .section { background: white; margin: 20px auto; padding: 20px; border-radius: 12px; width: 90%; max-width: 600px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+    video, textarea, select, button { width: 100%; margin-top: 10px; border-radius: 8px; }
+    button { background: #8e24aa; color: white; padding: 10px; border: none; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <h2>🧘 Sessions + Mood Tracker</h2>
+
+  <div class="section">
+    <h3>How are you feeling today?</h3>
+    <select id="mood">
+      <option value="">Select mood</option>
+      <option>Happy</option>
+      <option>Stressed</option>
+      <option>Anxious</option>
+      <option>Calm</option>
+    </select>
+    <textarea id="entry" rows="4" placeholder="Write your thoughts..."></textarea>
+    <button onclick="saveMood()">Save Mood Entry</button>
+    <p id="suggestion" style="margin-top:10px; font-style: italic;"></p>
+  </div>
+
+  <div class="section">
+    <h3>Mindfulness Meditation</h3>
+    <video controls>
+      <source src="assets/videos/mindfulness.mp4" type="video/mp4">
+    </video>
+  </div>
+
+  <div class="section">
+    <h3>Stress Relief Session</h3>
+    <video controls>
+      <source src="assets/videos/stress_relief.mp4" type="video/mp4">
+    </video>
+  </div>
+
+  <script>
+    function saveMood() {
+      const mood = document.getElementById("mood").value;
+      const text = document.getElementById("entry").value;
+      const entry = { date: new Date().toLocaleString(), mood, text };
+      let journal = JSON.parse(localStorage.getItem('moodJournal')) || [];
+      journal.push(entry);
+      localStorage.setItem('moodJournal', JSON.stringify(journal));
+      document.getElementById("suggestion").textContent = suggest(mood);
+    }
+
+    function suggest(mood) {
+      const suggestions = {
+        "happy": "🌟 Keep up the great energy!",
+        "stressed": "🧘 Try the Stress Relief Session below.",
+        "anxious": "🫁 Deep breaths... Mindfulness video may help.",
+        "calm": "✨ Maintain it with gentle breathing."
+      };
+      return suggestions[mood.toLowerCase()] || "";
+    }
+  </script>
+</body>
+</html>
