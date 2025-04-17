@@ -32,7 +32,7 @@ With rising stress, anxiety, and mental health challenges—especially among stu
 ## 🖼️ Screenshots
 
 ### 🏠 Home Page
-![Home Page](Screenshots)
+![Home Page](Screenshots/home.png)
 
 ### 📊 Mood Tracker
 ![Mood Tracker](screenshots/mood-tracker.png)
